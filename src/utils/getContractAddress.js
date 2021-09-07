@@ -38,7 +38,7 @@ const listTokensFarmDefault = {
       wana: '0x47a09fc7E7C55f81Bc0dE6b26101f3BF83df9356',
       contractFarm: '0x3b883Db5d5CcE09032fd41cE2331DcAb9D9181d7',
       contractVesting: '0x13dACc57d20bd1803683638605DEB055CaF7af2A',
-      token0: 'WANA', // it can be an address or a symbol
+      token0: 'BUSD', // it can be an address or a symbol
       symbolEarn: 'WANA',
       decimalsWana: 18,
       allowanceFarm: 0,
@@ -50,7 +50,7 @@ const listTokensFarmDefault = {
       vestingDuration: 0,
       apr: 0,
       yearlyWanaReward: 458957,
-      multiplier: 0.05,
+      multiplier: 0.1,
       autoRestake: false,
     },
   ],
@@ -76,7 +76,7 @@ const listTokensPoolDefault = {
       vestingDuration: 0,
       apr: 0,
       yearlyWanaReward: 332605,
-      multiplier: 0.05,
+      multiplier: 0.1,
       autoRestake: false,
       statusCompound: true,
     },
