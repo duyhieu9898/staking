@@ -51,7 +51,7 @@ export const setAdminAddress = (addressesProvider) => async (dispatch) => {
 export const SET_ADDRESS = 'SET_ADDRESS';
 export const setAddress = (walletAddress) => (dispatch) => {
   if (!!walletAddress) {
-    var shortAddress = `${walletAddress.slice(0, 8)}...${walletAddress.slice(
+    var shortAddress = `${walletAddress.slice(0, 4)}...${walletAddress.slice(
       walletAddress.length - 6,
       walletAddress.length
     )}`;

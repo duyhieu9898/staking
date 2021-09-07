@@ -93,15 +93,16 @@
 .style-dark-mode {
   position: relative;
   margin-left: 0.75rem;
-  margin-right: 3rem;
+  margin-right: 1rem;
 }
 
 .dropdown_network_header {
+  margin:0 10px;
   height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 10px 0 7px;
   transition: 0.3s;
   border-radius: 30px;
   font-weight: 500;
@@ -212,12 +213,7 @@
   }
 
   .connect-and-dark-mode {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: flex-end;
-    align-content: stretch;
+    flex-wrap: wrap;
   }
 
   .style-connect {

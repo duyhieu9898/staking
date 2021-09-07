@@ -35,8 +35,12 @@ html[data-theme='dark'] {
   background: rgb(38 38 38) !important;
 }
 
-[data-theme='dark'] .menu-bar,
-.background-mode {
+[data-theme='dark'] .menu-bar {
+  border-bottom: var(--background-color) !important;
+  box-shadow: 0 0 12px #5d5c5c;
+  background-color: var(--background-color) !important;
+}
+[data-theme='dark'] .background-mode {
   background-color: var(--background-color) !important;
 }
 
@@ -193,7 +197,7 @@ html[data-theme='dark'] {
 
 [data-theme='dark'] .dropdown_network_header,
 .dropdown-select-chain {
-  background-color: #242f36 !important;
+  background-color: #737272 !important;
 }
 
 [data-theme='dark'] .dropdown-select-chain .ant-dropdown-menu-item-group-title {
@@ -207,4 +211,14 @@ html[data-theme='dark'] {
 [data-theme='dark'] .dropdown-select-chain .ant-dropdown-menu-item:hover,
 .dropdown-select-chain .ant-dropdown-menu-submenu-title:hover {
   background-color: #35444f;
+}
+
+[data-theme='dark'] .bt-cnlo {
+  color: white !important;
+  background-color: rgba(115, 114, 114, 0.6) !important;
+  border-color: #2fc19a !important;
+}
+
+[data-theme='dark'] .bt-cnlo:hover {
+  border-color: #d9d9d9 !important;
 }

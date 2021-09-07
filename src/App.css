@@ -8,8 +8,10 @@
   box-shadow: 0 0 12px #f3f1f1;
 }
 
-.green-color {
+.bt-cnlo {
   color: #2fc19a !important;
+  height: 40px !important;
+  font-size: 16px !important;
 }
 
 .bt-cnlo:hover {
@@ -309,6 +311,13 @@ div.line-loading {
   }
   .logo a img {
     width: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .menu-bar {
+    display: flex;
+    flex-direction: column;
   }
 }
 

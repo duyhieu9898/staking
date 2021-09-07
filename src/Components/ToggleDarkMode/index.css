@@ -1,74 +1,84 @@
-div {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-.darkmode-switch {
-  position: relative;
-}
-
-.toggle {
-  position: relative;
-}
-
-.toggle input {
-  display: none;
-}
-
-.toggle input:checked ~ span {
-  border-color: #333;
-  background: #2c4e63;
-}
-
-.toggle input:checked ~ span:before {
-  left: 1.5rem;
-  box-shadow: inset -1.1rem 0rem 0 -0.65rem #ffc207;
-  background: transparent;
-}
-
-.toggle input:checked ~ span:after {
-  content: '★';
-  top: 0.15rem;
-  left: 1.35rem;
-  width: 0.5rem;
-  height: 0.5rem;
-  font-size: 0.7rem;
-  color: #ffc207;
-}
-
-.toggle span {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  width: 3rem;
-  height: 1.5rem;
-  border-radius: 5rem;
-  border: 0.15rem solid #666;
-  background: #5197c4;
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.toggle span:before {
-  content: '';
+.toggle-checkbox {
   position: absolute;
-  top: 0.15rem;
-  left: 0.12rem;
-  width: 1rem;
-  height: 1rem;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.toggle-slot {
+  font-size: 4px;
+  position: relative;
+  height: 10em;
+  width: 20em;
+  border: 3px solid #e4e7ec;
+  border-radius: 10em;
+  background-color: white;
+  box-shadow: 0px 0px 14px #e4e7ec;
+  transition: background-color 250ms;
+}
+
+.toggle-checkbox:checked ~ .toggle-slot {
+  background-color: #374151;
+}
+
+.toggle-button {
+  transform: translate(11em, 1.3em);
+  position: absolute;
+  height: 6em;
+  width: 6em;
   border-radius: 50%;
-  box-shadow: inset -4rem -4rem 0 0 #ffc207;
-  transition: all 0.5s cubic-bezier(0, 0.55, 0.45, 1);
+  background-color: #ffeccf;
+  box-shadow: inset 0px 0px 0px 0.75em #ffbb52;
+  transition: background-color 250ms, border-color 250ms, transform 500ms cubic-bezier(.26,2,.46,.71);
 }
 
-.toggle span:after {
-  content: '☁';
+.toggle-checkbox:checked ~ .toggle-slot .toggle-button {
+  background-color: #485367;
+  box-shadow: inset 0px 0px 0px 0.75em white;
+  transform: translate(1em, 1.3em);
+}
+
+.sun-icon {
   position: absolute;
-  top: 0.25rem;
-  left: 0.55rem;
-  width: 0.5rem;
-  height: 0.5rem;
-  color: #fff;
-  font-size: 0.7rem;
-  transition: all 0.5s cubic-bezier(0, 0.55, 0.45, 1);
+  height: 6em;
+  width: 6em;
+  color: #ffbb52;
+}
+
+.sun-icon-wrapper {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  opacity: 1;
+  transform: translate(1em, 1.25em) rotate(15deg);
+  transform-origin: 50% 50%;
+  transition: opacity 150ms, transform 500ms cubic-bezier(.26,2,.46,.71);
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .sun-icon-wrapper {
+  opacity: 0;
+  transform: translate(3em, 2em) rotate(0deg);
+}
+
+.moon-icon {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  color: white;
+}
+
+.moon-icon-wrapper {
+  position: absolute;
+  height: 6em;
+  width: 6em;
+  opacity: 0;
+  transform: translate(11em, 2em) rotate(0deg);
+  transform-origin: 50% 50%;
+  transition: opacity 150ms, transform 500ms cubic-bezier(.26,2.5,.46,.71);
+}
+
+.toggle-checkbox:checked ~ .toggle-slot .moon-icon-wrapper {
+  opacity: 1;
+  transform: translate(11em, 1.3em) rotate(-15deg);
 }

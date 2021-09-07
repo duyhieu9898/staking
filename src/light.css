@@ -10,7 +10,7 @@ html[data-theme='light'] {
 }
 
 [data-theme='light'] .menu-bar,
-.background-mode {
+[data-theme='dark'] .background-mode {
   background-color: var(--background-color) !important;
 }
 

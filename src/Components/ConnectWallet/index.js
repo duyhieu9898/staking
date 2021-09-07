@@ -13,7 +13,7 @@ export default function ConnectWallet() {
   return !!walletAddress ? (
     <LogoutWallet />
   ) : (
-    <Button className='green-color bt-cnlo' shape='round' onClick={() => connect()}>
+    <Button className='bt-cnlo' shape='round' onClick={() => connect()}>
       <Badge status='error' />
       Connect Wallet
     </Button>
