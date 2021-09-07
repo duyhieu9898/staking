@@ -8,12 +8,12 @@
   box-shadow: 0 0 12px #f3f1f1;
 }
 
-.pink-font {
-  color: #e35188 !important;
+.green-color {
+  color: #2fc19a !important;
 }
 
 .bt-cnlo:hover {
-  border-color: #e35188 !important;
+  border-color: #2fc19a !important;
 }
 
 .ant-select-selector {

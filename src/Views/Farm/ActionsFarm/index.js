@@ -126,8 +126,9 @@ export default function ActionsFarm({ token, fetchAllFarm, percentInPool }) {
             Stake
           </Button>
         </div>
-        <div className='action-witdraw'>
+        <div className='action-withdraw'>
           <Button
+            className="btn-secondary"
             loading={loadingWithdraw}
             icon={<ArrowDownOutlined />}
             onClick={() => withdrawTokenFarm()}

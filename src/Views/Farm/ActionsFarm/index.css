@@ -15,27 +15,32 @@
 }
 
 .actions-farm .action-stake,
-.actions-farm .action-witdraw {
+.actions-farm .action-withdraw {
   width: 48.9%;
 }
 
 .actions-farm .action-stake {
   padding-right: 0.15rem;
 }
-.actions-farm .action-witdraw {
+.actions-farm .action-withdraw {
   padding-left: 0.15rem;
 }
 
 .actions-farm .action-stake button,
-.actions-farm .action-witdraw button {
+.actions-farm .action-withdraw button {
   width: 100%;
   border-radius: 0.75rem;
 }
 
-.input-stake-withdraw .actions-farm .action-stake .ant-btn,
-.input-stake-withdraw .actions-farm .action-witdraw .ant-btn {
-  background: #e35188;
-  border-color: #e35188;
+.input-stake-withdraw .actions-farm .action-stake .ant-btn {
+  background: #2fc19a;
+  border-color: #2fc19a;
+  color: white;
+}
+
+.input-stake-withdraw .actions-farm .action-withdraw .ant-btn{
+  background: #f09e40;
+  border-color:#f09e40;
   color: white;
 }
 

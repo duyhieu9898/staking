@@ -1,8 +1,7 @@
 import bnb from 'Assets/icons/binance-smart-chain-icon.png';
 
-import Artboard1 from 'Assets/icons/Artboard1.png';
-import Artboard3 from 'Assets/icons/Artboard3.png';
-import Artboard4 from 'Assets/icons/Artboard4.png';
+import IconWanaka from 'Assets/icons/wanaka.svg';
+
 
 const contractAddress = {
   //BSC Mainnet
@@ -32,7 +31,7 @@ const listTokensFarmDefault = {
   ],
   97: [
     {
-      icon: Artboard3,
+      icon: IconWanaka,
       namePair: 'WANA-BUSD',
       addressLP: '0x22ABa1512Aa98574406bdbAea5e1aB312590a310',
       wana: '0x47a09fc7E7C55f81Bc0dE6b26101f3BF83df9356',
@@ -61,7 +60,7 @@ const listTokensPoolDefault = {
   ],
   97: [
     {
-      icon: Artboard4,
+      icon: IconWanaka,
       namePair: 'WANA',
       addressLP: '0x47a09fc7E7C55f81Bc0dE6b26101f3BF83df9356',
       pairTokenAndNative: '0x7164c4F91Feb60b29E3781a2deA79CB0b1CcB0C1',

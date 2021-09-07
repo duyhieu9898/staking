@@ -16,7 +16,7 @@ import {
 import { parseBalance } from 'utils/helper';
 import ActionsPool from 'Views/Farm/ActionsPool';
 import store from 'store/index';
-import logoMochi from 'Assets/logo-mochi.png';
+import logoWanaka from 'Assets/logo-wanaka.svg';
 import './index.css';
 
 export default function CardPool({
@@ -96,7 +96,7 @@ export default function CardPool({
       <div className='item-staking'>
         <div className='header-item'>
           <div className='logo-token'>
-            <img src={!!token.icon ? token.icon : logoMochi} alt='logo-token' />
+            <img src={!!token.icon ? token.icon : logoWanaka} alt='logo-token' />
           </div>
           <div className='info-pool textmode'>
             <h2 className='textmode'>{token.namePair}</h2>(no vesting pool)
@@ -186,7 +186,7 @@ export default function CardPool({
               onClick={() => approveTokenFarm(token.addressLP, index)}
               loading={loadingApprove}
             >
-              Approve Contract
+              {!walletAddress ? 'Unlock Wallet' : 'Approve Contract'} 
             </Button>
           )}
         </div>

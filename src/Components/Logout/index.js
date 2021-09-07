@@ -20,7 +20,7 @@ export default function LogoutWallet() {
 
   return (
     <div className='logoutModal'>
-      <Button className='pink-font bt-cnlo' shape='round' onClick={() => setIsModalVisible(true)}>
+      <Button className='green-color bt-cnlo' shape='round' onClick={() => setIsModalVisible(true)}>
         <Badge status='success' />
         {shortAddress}
       </Button>

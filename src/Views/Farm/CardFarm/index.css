@@ -55,21 +55,21 @@
   padding: 0px 8px;
   font-size: 14px;
   background: transparent;
-  border: 2px solid #e35188;
+  border: 2px solid #2fc19a;
 }
 .staking-view .list-staking .item-staking .header-item .info-pool .box-multi .text-core svg {
-  fill: #e35188;
+  fill: #2fc19a;
 }
 .staking-view .list-staking .item-staking .header-item .info-pool .box-multi .text-core span {
   margin-left: 0.3rem;
-  color: #e35188;
+  color: #2fc19a;
 }
 .staking-view .list-staking .item-staking .header-item .info-pool .box-multi .multier-pool {
   margin: 0 0.25rem;
   padding: 0.05rem 0.6rem;
-  border: 1px solid #cd2076;
+  border: 1px solid #1cc48c;
   border-radius: 1rem;
-  background: #cd2076;
+  background: #1cc48c;
 }
 .staking-view .list-staking .item-staking .header-item .info-pool .box-multi .multier-pool h3 {
   color: white;
@@ -124,12 +124,12 @@
 
 .staking-view .list-staking .item-staking .content-item .wrap-amount-stake .token-earn .text-pink {
   font-weight: bold;
-  color: #cd2076 !important;
+  color: #1cc48c !important;
 }
 .harvest .ant-btn {
   border-radius: 0.75rem;
-  background: #e35188;
-  border-color: #e35188;
+  background: #2fc19a;
+  border-color: #2fc19a;
   color: white;
   min-width: 82px;
 }
@@ -165,14 +165,14 @@
   margin-bottom: 1.5rem;
   width: 100%;
   border-radius: 1rem;
-  background: #e35188;
-  border-color: #e35188;
+  background: #2fc19a;
+  border-color: #2fc19a;
 }
 .ant-btn.ant-btn-round.ant-btn-lg.btn-confrim-farm {
   margin-top: 0.5rem;
   border-radius: 1rem;
-  background: #e35188;
-  border-color: #e35188;
+  background: #2fc19a;
+  border-color: #2fc19a;
   color: white;
 }
 
@@ -192,10 +192,10 @@
   justify-content: center;
   cursor: pointer;
   font-weight: bold;
-  color: #e35188;
+  color: #2fc19a;
 }
 .btn-show-detail svg {
-  fill: #e35188;
+  fill: #2fc19a;
 }
 
 .staking-view .list-staking .item-staking .footer-item .detail-pool-stake {
@@ -229,10 +229,10 @@
   font-weight: bold;
 }
 .staking-view .list-staking .item-staking .footer-item .detail-pool-stake a {
-  color: #e35188;
+  color: #2fc19a;
 }
 .staking-view .list-staking .item-staking .footer-item .detail-pool-stake a svg {
-  fill: #e35188;
+  fill: #2fc19a;
 }
 
 .staking-view .list-staking .item-staking .content-item .wrap-show-vesting {
@@ -251,7 +251,7 @@
   text-align: start;
   font-weight: bold;
   margin: 0.5rem 0;
-  color: #e35188 !important;
+  color: #2fc19a !important;
 }
 
 .multier-pool .wana-per-block {

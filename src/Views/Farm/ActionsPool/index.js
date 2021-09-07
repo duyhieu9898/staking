@@ -36,6 +36,7 @@ export default function ActionsPool({ token, fetchAllFarm, percentInPool }) {
   }
 
   async function handleChangeAmountStake(amount) {
+    console.log('token', token)
     if (amount > parseBalance(token.balanceLP, 18)) {
       setAmountStake(token.balanceLP);
     } else {
@@ -126,8 +127,9 @@ export default function ActionsPool({ token, fetchAllFarm, percentInPool }) {
             Stake
           </Button>
         </div>
-        <div className='action-witdraw'>
+        <div className='action-withdraw'>
           <Button
+            className="btn-secondary"
             loading={loadingWithdraw}
             icon={<ArrowDownOutlined />}
             onClick={() => withdrawTokenFarm()}
