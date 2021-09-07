@@ -1,9 +1,9 @@
 import { parseBalance } from 'utils/helper';
 import ERC20 from 'Contracts/ERC20.json';
 import Farm from 'Contracts/farm/Farm.json';
-import MomaFarm from 'Contracts/farm/MomaFarm.json';
+import WanaFarm from 'Contracts/farm/WanaFarm.json';
 import Vesting from 'Contracts/farm/Vesting.json';
-import Pair from 'Contracts/UniswapV2Pair.json';
+import Pair from 'Contracts/IPancakePair.json';
 import { message } from 'antd';
 
 ////////////////////
@@ -177,7 +177,7 @@ export const claimTotalVesting = (contractVesting) => async (dispatch, getState)
 };
 
 const roundToTwoDp = (number) => Math.round(number * 100) / 100;
-export const fetchAprPool = (addressLP, contractFarm, moma, yearlyMomaReward) => async (
+export const fetchAprPool = (addressLP, contractFarm, wana, yearlyWanaReward) => async (
   dispatch,
   getState
 ) => {
@@ -187,51 +187,51 @@ export const fetchAprPool = (addressLP, contractFarm, moma, yearlyMomaReward) =>
     const totalLpTokenInPool = await pair.methods.balanceOf(contractFarm).call();
     const reserves = await pair.methods.getReserves().call();
     let token0 = await pair.methods.token0().call();
-    let amountMoma = 0;
-    if (token0.toLowerCase() !== moma.toLowerCase()) {
-      amountMoma = reserves[1];
+    let amountWana = 0;
+    if (token0.toLowerCase() !== wana.toLowerCase()) {
+      amountWana = reserves[1];
     } else {
-      amountMoma = reserves[0];
+      amountWana = reserves[0];
     }
     const totalSupply = await pair.methods.totalSupply().call();
-    const LpTokenPriceMoma = (amountMoma * 2) / totalSupply;
-    const poolLiquidityMoma = totalLpTokenInPool * LpTokenPriceMoma;
+    const LpTokenPriceWana = (amountWana * 2) / totalSupply;
+    const poolLiquidityWana = totalLpTokenInPool * LpTokenPriceWana;
     const farm = new web3.eth.Contract(Farm.abi, contractFarm);
     const currentBlock = await web3.eth.getBlockNumber();
     const multiplier = await farm.methods.getMultiplier(currentBlock, currentBlock + 1).call();
     const reducingCycle = await farm.methods.reducingCycle().call();
     const rewardPerBlock = await farm.methods.rewardPerBlock().call();
-    const yearlyMomaRewardAllocation = (multiplier * rewardPerBlock * reducingCycle * 12) / 1e12;
+    const yearlyWanaRewardAllocation = (multiplier * rewardPerBlock * reducingCycle * 12) / 1e12;
 
-    // const yearlyMomaRewardAllocation = yearlyMomaReward * 10 ** 18;
-    let apr = (yearlyMomaRewardAllocation / poolLiquidityMoma) * 100;
+    // const yearlyWanaRewardAllocation = yearlyWanaReward * 10 ** 18;
+    let apr = (yearlyWanaRewardAllocation / poolLiquidityWana) * 100;
     apr = roundToTwoDp(apr);
     return apr;
   } catch (error) {
-    console.log(error);
+    console.log("roundToTwoDp\n", error);
     // message.error('Fetch Apr Error !');
     return false;
   }
-  // const poolLiquidityMoma = totalLpTokenInPool * LpTokenPriceMoma;
-  // const apr = yearlyMomaRewardAllocation.div(poolLiquidityMoma).times(100);
+  // const poolLiquidityWana = totalLpTokenInPool * LpTokenPriceWana;
+  // const apr = yearlyWanaRewardAllocation.div(poolLiquidityWana).times(100);
   // return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber();
 };
 
-export const fetchTotalTokenLP = (addressTokenLP, addressContractFarm, moma) => async (
+export const fetchTotalTokenLP = (addressTokenLP, addressContractFarm, wana) => async (
   dispatch,
   getState
 ) => {
   const { web3 } = getState();
   try {
     const instanceLP = new web3.eth.Contract(ERC20.abi, addressTokenLP);
-    const instanceMoma = new web3.eth.Contract(ERC20.abi, moma);
-    let balanceMomaOfPair = await instanceMoma.methods.balanceOf(addressTokenLP).call();
+    const instanceWana = new web3.eth.Contract(ERC20.abi, wana);
+    let balanceWanaOfPair = await instanceWana.methods.balanceOf(addressTokenLP).call();
     let balanceLPOfFarm = await instanceLP.methods.balanceOf(addressContractFarm).call();
     let totalSupplyLP = await instanceLP.methods.totalSupply().call();
-    let totalTokenLP = (2 * balanceMomaOfPair * balanceLPOfFarm) / totalSupplyLP;
+    let totalTokenLP = (2 * balanceWanaOfPair * balanceLPOfFarm) / totalSupplyLP;
     return totalTokenLP;
   } catch (error) {
-    console.log(error);
+    console.log("fetchTotalTokenLP\n", error);
     // message.error('Fetch Total Token LP Error !');
   }
 };
@@ -239,8 +239,8 @@ export const fetchTotalTokenLP = (addressTokenLP, addressContractFarm, moma) => 
 export const fetchPriceTokenWithUSDT = (
   contractAddress,
   pairTokenAndNative,
-  moma,
-  decimalsMoma
+  wana,
+  decimalsWana
 ) => async (dispatch, getState) => {
   const { web3 } = getState();
   try {
@@ -268,19 +268,19 @@ export const fetchPriceTokenWithUSDT = (
       let reservesTokenNaive = await instancePairTokenNative.methods.getReserves().call();
       let reserves0TokenNative = reservesTokenNaive[0],
         reserves1TokenNative = reservesTokenNaive[1];
-      if (token0TokenNative.toLowerCase() !== moma.toLowerCase()) {
+      if (token0TokenNative.toLowerCase() !== wana.toLowerCase()) {
         [reserves0TokenNative, reserves1TokenNative] = [reserves1TokenNative, reserves0TokenNative];
       }
-      let priceMoma =
+      let priceWana =
         (reserves1TokenNative /
           Math.pow(10, contractAddress.NATIVE.decimals) /
-          (reserves0TokenNative / Math.pow(10, decimalsMoma))) *
+          (reserves0TokenNative / Math.pow(10, decimalsWana))) *
         priceNative;
 
-      return priceMoma;
+      return priceWana;
     }
   } catch (error) {
-    console.log(error);
+    console.log("fetchPriceTokenWithUSDT\n", error);
     // message.error('Fetch Price Token Error !');
   }
 };
@@ -296,7 +296,7 @@ export const fetchVestingDuration = (contractVesting, blocksPerMonth) => async (
       let vestingDuration = await vestingInstance.methods.vestingDuration().call();
       return vestingDuration / blocksPerMonth;
     } catch (error) {
-      console.log(error);
+      console.log("fetchVestingDuration\n", error);
       // message.error('Fetch Vesting Claimable Error!');
     }
   }
@@ -320,7 +320,7 @@ export const depositFarm = (amountWei, contractFarm) => async (dispatch, getStat
         return true;
       })
       .on('error', (error, receipt) => {
-        console.log(error);
+        console.log("depositFarm\n", error);
         // message.error('Deposit Error !');
         return false;
       });
@@ -389,11 +389,11 @@ export const fetchMultiplierFarm = (contractFarm) => async (dispatch, getState) 
   }
 };
 
-// Functions use contract MomaFarm
+// Functions use contract WanaFarm
 export const depositPool = (amountWei, contractPool) => async (dispatch, getState) => {
   const { web3, walletAddress } = getState();
   try {
-    const instancePool = new web3.eth.Contract(MomaFarm.abi, contractPool);
+    const instancePool = new web3.eth.Contract(WanaFarm.abi, contractPool);
     await instancePool.methods
       .deposit(amountWei)
       .send({ from: walletAddress })
@@ -419,7 +419,7 @@ export const depositPool = (amountWei, contractPool) => async (dispatch, getStat
 export const withdrawPool = (amountWei, contractPool) => async (dispatch, getState) => {
   const { web3, walletAddress } = getState();
   try {
-    const farm = new web3.eth.Contract(MomaFarm.abi, contractPool);
+    const farm = new web3.eth.Contract(WanaFarm.abi, contractPool);
     await farm.methods
       .withdraw(amountWei)
       .send({ from: walletAddress })
@@ -441,9 +441,9 @@ export const withdrawPool = (amountWei, contractPool) => async (dispatch, getSta
 export const fetchPendingRewardPool = (contractPool) => async (dispatch, getState) => {
   const { web3, walletAddress } = getState();
   try {
-    const farm = new web3.eth.Contract(MomaFarm.abi, contractPool);
-    let pendingMoma = await farm.methods.pendingMoma(walletAddress).call();
-    return pendingMoma;
+    const farm = new web3.eth.Contract(WanaFarm.abi, contractPool);
+    let pendingWana = await farm.methods.pendingToken(walletAddress).call();
+    return pendingWana;
   } catch (error) {
     console.log(error);
     // message.error('Fetch Pending Reward Error !');
@@ -453,7 +453,7 @@ export const fetchPendingRewardPool = (contractPool) => async (dispatch, getStat
 export const fetchAmountStakePool = (contractPool) => async (dispatch, getState) => {
   const { web3, walletAddress } = getState();
   try {
-    const farm = new web3.eth.Contract(MomaFarm.abi, contractPool);
+    const farm = new web3.eth.Contract(WanaFarm.abi, contractPool);
     let amountStakedPool = await farm.methods.userInfo(walletAddress).call();
     return amountStakedPool.amount;
   } catch (error) {
@@ -465,7 +465,7 @@ export const fetchAmountStakePool = (contractPool) => async (dispatch, getState)
 export const fetchMultiplierPool = (contractPool) => async (dispatch, getState) => {
   const { web3 } = getState();
   try {
-    const farm = new web3.eth.Contract(MomaFarm.abi, contractPool);
+    const farm = new web3.eth.Contract(WanaFarm.abi, contractPool);
     const currentBlock = await web3.eth.getBlockNumber();
     const multiplier = await farm.methods.getMultiplier(currentBlock, currentBlock + 1).call();
     return multiplier;
@@ -488,7 +488,7 @@ export const fetchTotalTokenPool = (addressTokenLP, contractPool) => async (disp
   }
 };
 
-export const fetchApyPool = (addressLP, contractPool, yearlyMomaReward) => async (
+export const fetchApyPool = (addressLP, contractPool, yearlyWanaReward) => async (
   dispatch,
   getState
 ) => {
@@ -496,14 +496,14 @@ export const fetchApyPool = (addressLP, contractPool, yearlyMomaReward) => async
   try {
     const tokenLP = new web3.eth.Contract(ERC20.abi, addressLP);
     const totalLpTokenInPool = await tokenLP.methods.balanceOf(contractPool).call();
-    const farm = new web3.eth.Contract(MomaFarm.abi, contractPool);
+    const farm = new web3.eth.Contract(WanaFarm.abi, contractPool);
     const currentBlock = await web3.eth.getBlockNumber();
     const multiplier = await farm.methods.getMultiplier(currentBlock, currentBlock + 1).call();
     const reducingCycle = await farm.methods.reducingCycle().call();
-    const rewardPerBlock = await farm.methods.momaPerBlock().call();
-    const yearlyMomaRewardAllocation = (multiplier * rewardPerBlock * reducingCycle * 12) / 1e12;
-    // const yearlyMomaRewardAllocation = yearlyMomaReward * 10 ** 18;
-    let apr = yearlyMomaRewardAllocation / totalLpTokenInPool;
+    const rewardPerBlock = await farm.methods.getTokenPerBlock().call();
+    const yearlyWanaRewardAllocation = (multiplier * rewardPerBlock * reducingCycle * 12) / 1e12;
+    // const yearlyWanaRewardAllocation = yearlyWanaReward * 10 ** 18;
+    let apr = yearlyWanaRewardAllocation / totalLpTokenInPool;
     let dailyAPR = apr / 365;
     let apy = (1 + dailyAPR) ** 365 - 1;
     apy = roundToTwoDp(apy * 100);
@@ -521,7 +521,7 @@ export const calcPercentStakedPool = (addressLP, contractPool) => async (dispatc
     try {
       const tokenLP = new web3.eth.Contract(ERC20.abi, addressLP);
       const totalLpTokenInPool = await tokenLP.methods.balanceOf(contractPool).call();
-      const farm = new web3.eth.Contract(MomaFarm.abi, contractPool);
+      const farm = new web3.eth.Contract(WanaFarm.abi, contractPool);
       const amountStakedPool = await farm.methods.userInfo(walletAddress).call();
       const percentInPool = ((amountStakedPool.amount / totalLpTokenInPool) * 100).toFixed(2);
       return percentInPool;

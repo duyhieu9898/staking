@@ -1,15 +1,11 @@
 <p align="center">
-<img src="./images/mochi.png" />
+<img src="./images/wanakafarm.png" />
 </p>
-<h1 align="center">Mochi Market</h1>
-
-## Introduction 👋
-
-Mochi.Market envisions to be the multi-chain decentralized exchange ecosystem for non-fungible tokens (“NFT”).
+<h1 align="center">Wanaka staking</h1>
 
 ## Home Page
 
-[https://mochi.market](https://mochi.market)
+[https://wanakafarm.com](https://wanakafarm.com)
 
 ## License
 

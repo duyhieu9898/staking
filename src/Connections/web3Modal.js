@@ -7,11 +7,8 @@ import { getWeb3List } from 'utils/getWeb3List';
 import { numberToHex } from 'web3-utils';
 
 const rpcSupport = {
-  1: 'https://mainnet.infura.io/v3/bd65aacb68614592bb014d78c92a9786',
-  4: 'https://rinkeby.infura.io/v3/bd65aacb68614592bb014d78c92a9786',
-  97: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
-  56: 'https://bsc-dataseed.binance.org/',
-  137: 'https://rpc-mainnet.maticvigil.com',
+  97: 'https://data-seed-prebsc-2-s1.binance.org:8545/',
+  56: 'https://bsc-dataseed.binance.org/'
 };
 
 const providerOptions = {
@@ -50,23 +47,10 @@ const paramsSwitchNetwork = {
         symbol: 'BNB',
         decimals: 18,
       },
-      rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],
+      rpcUrls: ['https://data-seed-prebsc-2-s1.binance.org:8545/'],
       blockExplorerUrls: ['https://testnet.bscscan.com/'],
     },
-  ],
-  137: [
-    {
-      chainId: '0x89',
-      chainName: 'Polygon',
-      nativeCurrency: {
-        name: 'MATIC',
-        symbol: 'MATIC',
-        decimals: 18,
-      },
-      rpcUrls: ['https://rpc-mainnet.maticvigil.com'],
-      blockExplorerUrls: ['https://polygonscan.com/'],
-    },
-  ],
+  ]
 };
 
 export const selectChain = async (chainId, walletAddress, isETH) => {
@@ -104,7 +88,6 @@ export const injectNetworkEthereum = async (chainId) => {
 
 export const connectWeb3Modal = async () => {
   const { chainId } = store.getState();
-
   if (!!paramsSwitchNetwork[chainId]) {
     injectNetworkNoEthereum(chainId);
   } else {

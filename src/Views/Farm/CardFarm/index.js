@@ -44,18 +44,18 @@ export default function CardFarm({
   useEffect(() => {
     const calculateTotalLock = async () => {
       let priceToken = await store.dispatch(
-        fetchPriceTokenWithUSDT(contractAddress, token.addressLP, token.moma, token.decimalsMoma)
+        fetchPriceTokenWithUSDT(contractAddress, token.addressLP, token.wana, token.decimalsWana)
       );
 
       priceToken = !!priceToken && priceToken > 0 ? priceToken : 0;
 
       let totalToekLP =
         (await store.dispatch(
-          fetchTotalTokenLP(token.addressLP, token.contractFarm, token.moma)
+          fetchTotalTokenLP(token.addressLP, token.contractFarm, token.wana)
         )) >=
         10 ** 16
           ? (await store.dispatch(
-              fetchTotalTokenLP(token.addressLP, token.contractFarm, token.moma)
+              fetchTotalTokenLP(token.addressLP, token.contractFarm, token.wana)
             )) /
             10 ** 18
           : 0;
@@ -67,7 +67,7 @@ export default function CardFarm({
     const fetchDataPool = async () => {
       setAprPool(
         await store.dispatch(
-          fetchAprPool(token.addressLP, token.contractFarm, token.moma, token.yearlyMomaReward)
+          fetchAprPool(token.addressLP, token.contractFarm, token.wana, token.yearlyWanaReward)
         )
       );
       setMultiplier(await store.dispatch(fetchMultiplierFarm(token.contractFarm)));
@@ -132,7 +132,7 @@ export default function CardFarm({
                   {isInt(parseBalance(multiplier, 12) * token.multiplier)
                     ? parseInt(parseBalance(multiplier, 12) * token.multiplier)
                     : parseFloat(parseBalance(multiplier, 12) * token.multiplier).toFixed(2)}{' '}
-                  <span className='moma-per-block'>{token.symbolEarn}/Block</span>
+                  <span className='wana-per-block'>{token.symbolEarn}/Block</span>
                 </h3>
               </div>
             </div>
@@ -230,7 +230,7 @@ export default function CardFarm({
                 <div className='title-vesting'>
                   Locked reward:{' '}
                   <Tooltip
-                    title={`After harvesting your MOMA, it is locked for ${vestingDuration} months and appears here. Over the next ${vestingDuration} months, harvested MOMA will linearly become claimable in the "Claimable rewards" section below`}
+                    title={`After harvesting your WANA, it is locked for ${vestingDuration} months and appears here. Over the next ${vestingDuration} months, harvested WANA will linearly become claimable in the "Claimable rewards" section below`}
                   >
                     <QuestionCircleOutlined />
                   </Tooltip>{' '}
@@ -352,7 +352,7 @@ export default function CardFarm({
               </div>
               <div className='redirect-swap'>
                 <a
-                  href={`${rootUrlsView.addLP}${token.token0}/${token.moma}`}
+                  href={`${rootUrlsView.addLP}${token.token0}/${token.wana}`}
                   target='_blank'
                   rel='noreferrer'
                 >

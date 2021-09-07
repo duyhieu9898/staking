@@ -51,7 +51,7 @@ export default function CardPool({
     const fetchDataPool = async () => {
       setApyPool(
         await store.dispatch(
-          fetchApyPool(token.addressLP, token.contractPool, token.yearlyMomaReward)
+          fetchApyPool(token.addressLP, token.contractPool, token.yearlyWanaReward)
         )
       );
       setMultiplier(await store.dispatch(fetchMultiplierPool(token.contractPool)));
@@ -104,7 +104,7 @@ export default function CardPool({
               <div className='multier-pool'>
                 <h3>
                   {parseBalance(multiplier, 12) * token.multiplier}{' '}
-                  <span className='moma-per-block'>{token.symbolEarn}/Block</span>
+                  <span className='token-per-block'>{token.symbolEarn}/Block</span>
                 </h3>
               </div>
             </div>

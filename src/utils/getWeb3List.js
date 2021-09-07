@@ -10,59 +10,14 @@ export const web3Default = {
   //BSC Testnet
   97: {
     web3Default: new Web3(
-      new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s3.binance.org:8545/')
+      new Web3.providers.HttpProvider('https://data-seed-prebsc-2-s3.binance.org:8545/')
     ),
     name: 'BSC Testnet',
     explorer: 'https://testnet.bscscan.com/tx/',
   },
-  4: {
-    web3Default: new Web3(
-      new Web3.providers.HttpProvider(
-        'https://rinkeby.infura.io/v3/bd65aacb68614592bb014d78c92a9786'
-      )
-    ),
-    name: 'Rinkeby Testnet',
-    explorer: 'https://rinkeby.etherscan.io',
-  },
-  1: {
-    web3Default: new Web3(
-      new Web3.providers.HttpProvider(
-        'https://mainnet.infura.io/v3/bd65aacb68614592bb014d78c92a9786'
-      )
-    ),
-    name: 'Ethereum Mainnet',
-    explorer: 'https://etherscan.io',
-  },
-  137: {
-    web3Default: new Web3(new Web3.providers.HttpProvider('https://rpc-mainnet.maticvigil.com')),
-    name: 'Ethereum Mainnet',
-    explorer: 'https://polygonscan.com/',
-  },
 };
 
 export const listInjectNetwork = {
-  1: {
-    chainId: '0x1',
-    chainName: 'Ethereum',
-    nativeCurrency: {
-      name: 'Ethereum',
-      symbol: 'ETH',
-      decimals: 18,
-    },
-    rpcUrls: ['https://mainnet.infura.io/v3'],
-    blockExplorerUrls: ['https://etherscan.com'],
-  },
-  4: {
-    chainId: '0x4',
-    chainName: 'Rinkeby',
-    nativeCurrency: {
-      name: 'Rinkeby',
-      symbol: 'ETH',
-      decimals: 18,
-    },
-    rpcUrls: ['https://mainnet.infura.io/v3'],
-    blockExplorerUrls: ['https://rinkeby.etherscan.io'],
-  },
   56: {
     chainId: '0x38',
     chainName: 'Binance Smart Chain',
